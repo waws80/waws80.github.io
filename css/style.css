@@ -169,7 +169,7 @@ span.menu{
 }
 .header {
 	background: url('../images/politician.jpg') no-repeat 0px 0px;
-	min-height:700px;
+	min-height:400px;
 	background-size:cover;
 	margin-top:4em;
 }
@@ -1490,8 +1490,74 @@ ul.share li {
 
 }
 /*内容区域*/
-#content{
+#content-div{
 	width: 90%;
-	margin: 40px auto;
-	color: #fffeee;
+	height: auto;
+	margin: 0px 120px;
+	padding-bottom: 30px;
+    /*-webkit-column-count: 3;*/
+    /*!*-webkit-column-gap: 10px；*/
+    /*-webkit-column-rule: 5px solid #333；*/
+    /*-webkit-column-width: 210px；*!*/
+
+    /*-moz-column-count: 3;*/
+    /*!*-moz-column-gap: 20px；*/
+    /*-moz-column-rule: 5px solid #333；*/
+    /*-moz-column-width: 210px；*!*/
+
+    /*column-count: 3;*/
+    /*!*column-gap: 10px；*/
+    /*column-rule: 5px solid #333；*/
+    /*column-width: 210px；*!*/
+}
+#content-table{
+	width: 100%;
+	height: auto;
+	text-align: center;
+
+}
+#content-table td{
+	width: 25%;
+	height: 300px;
+}
+.table-item{
+	width: 80%;
+	height: 100%;
+	min-height: 300px;
+}
+.item-top{
+	width: 100%;
+	height: 75%;
+	background-color: #f0f0f0;
+	border-top-left-radius: 30px;
+	border-top-right-radius: 30px;
+}
+.item-bottom{
+	width: 100%;
+	height: 25%;
+	position: relative;
+	background-color: #757a7f;
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
+}
+.item-bottom a{
+	width: 100%;
+	height: 100%;
+	font-size: 20px;
+	color: #f0f0f0;
+}
+.item-title{
+	padding-top: 30px;
+	font-size: 23px;
+	font-style: normal;
+}
+.item-info{
+	padding-top: 20px;
+	font-size: 12px;
+	font-style: normal;
+	font-family: Corbel;
+}
+.item-content{
+	padding: 20px;
+	font-size: 16px;
 }
