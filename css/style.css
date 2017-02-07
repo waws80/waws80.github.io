@@ -1560,6 +1560,21 @@ ul.share li {
 	}
 
 }
+
+@media screen and (max-device-width: 360px){
+	div.wrap{
+		width:100%;
+		overflow:hidden;
+		/*_zoom:1;*/
+		margin:0 auto;
+		height: auto;
+		text-align: center;
+		column-count: 1;
+		position: relative;
+		padding-left: 10%;
+	}
+
+}
 /*内容区域*/
 #content-div{
 	width: 100%;
