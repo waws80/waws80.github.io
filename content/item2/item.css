@@ -35,7 +35,7 @@ h1{
 .iframe{
 	width: 100%;
 	height: auto;
-	min-height: 400px;
+	min-height: 2700px;
 	margin: 60px;
 	max-height: 1000px;
 }
@@ -44,6 +44,7 @@ h1{
 	color: #FFFFFF;
 	margin-right: 100px;
 	margin-top: 150px;
+	padding-bottom: 50px;
 }
 @media screen and (max-device-width: 800px){
 	.iframe{
