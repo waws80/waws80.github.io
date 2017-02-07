@@ -865,7 +865,19 @@ ul.share li {
 	font-family: 'Playfair Display', serif;
 }
 /*-- responsive-design starts-here --*/
-
+@media screen and(max-width:2000px ){
+	div.wrap{
+		width:100%;
+		overflow:hidden;
+		/*_zoom:1;*/
+		margin:0 auto;
+		height: auto;
+		text-align: center;
+		column-count: 3;
+		position: relative;
+		padding-left: 10%;
+	}
+}
 @media screen and (max-width: 1366px) {
 	div.wrap{
 		width:100%;
@@ -1596,16 +1608,16 @@ ul.share li {
     /*column-rule: 5px solid #333；*/
     /*column-width: 210px；*!*/
 }
-div.wrap{
-	width:100%;
-	overflow:hidden;
-	/*_zoom:1;*/
-	padding-left: 10%;
-	margin: auto;
-	height: auto;
-	text-align: center;
-	column-count: 3;
-}
+/*div.wrap{*/
+	/*width:100%;*/
+	/*overflow:hidden;*/
+	/*!*_zoom:1;*!*/
+	/*padding-left: 10%;*/
+	/*margin: auto;*/
+	/*height: auto;*/
+	/*text-align: center;*/
+	/*column-count: 3;*/
+/*}*/
 
 
 .table-item{
