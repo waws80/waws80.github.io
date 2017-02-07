@@ -1623,8 +1623,7 @@ ul.share li {
 .table-item{
 	width: 80%;
 	height: 300px;
-	margin-left: 10%;
-	margin-top: 50px;
+	margin: 60px auto;
 }
 .item-top{
 	width: 100%;
