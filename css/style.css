@@ -1621,8 +1621,9 @@ ul.share li {
 
 
 .table-item{
-	width: 60%;
+	width: 80%;
 	height: 300px;
+	margin-left: 10%;
 	margin-top: 50px;
 }
 .item-top{
@@ -1648,17 +1649,20 @@ ul.share li {
 	color: #f0f0f0;
 }
 .item-title{
+	text-align: center;
 	padding-top: 30px;
 	font-size: 23px;
 	font-style: normal;
 }
 .item-info{
+	text-align: center;
 	padding-top: 20px;
 	font-size: 12px;
 	font-style: normal;
 	font-family: Corbel;
 }
 .item-content{
+	text-align: center;
 	padding: 20px;
 	font-size: 16px;
 }
