@@ -33,9 +33,10 @@ h1{
 	border-bottom-right-radius: 200px;
 }
 .iframe{
-	width: 100%;
+	width: 90%;
 	height: 2700px;
-	margin: 60px;
+	margin: auto;
+	padding: 60px;
 }
 .item-bottom{
 	font-size: 20px;
