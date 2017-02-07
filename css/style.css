@@ -875,7 +875,6 @@ ul.share li {
 		text-align: center;
 		column-count: 3;
 		position: relative;
-		padding-left: 10%;
 	}
 }
 @media screen and (max-width: 1366px) {
@@ -888,7 +887,7 @@ ul.share li {
 		text-align: center;
 		column-count: 3;
 		position: relative;
-		padding-left: 10%;
+
 	}
 
 	.logo {
@@ -914,7 +913,7 @@ ul.share li {
 		text-align: center;
 		column-count: 3;
 		position: relative;
-		padding-left: 10%;
+
 	}
 
 	.slider-info {
@@ -969,7 +968,7 @@ ul.share li {
 		text-align: center;
 		column-count: 3;
 		position: relative;
-		padding-left: 10%;
+
 	}
 
 	.sb-search.sb-search-open, .no-js .sb-search {
@@ -1086,7 +1085,7 @@ ul.share li {
 		text-align: center;
 		column-count: 1;
 		position: relative;
-		padding-left: 10%;
+
 	}
 
 	.logo img {
@@ -1208,7 +1207,7 @@ ul.share li {
 		text-align: center;
 		column-count: 1;
 		position: relative;
-		padding-left: 10%;
+
 	}
 
 	.logo {
@@ -1282,7 +1281,6 @@ ul.share li {
 		text-align: center;
 		column-count: 1;
 		position: relative;
-		padding-left: 10%;
 	}
 
 	.top-header {
@@ -1438,7 +1436,7 @@ ul.share li {
 		text-align: center;
 		column-count: 1;
 		position: relative;
-		padding-left: 10%;
+
 	}
 
 	.span2 {
@@ -1583,7 +1581,7 @@ ul.share li {
 		text-align: center;
 		column-count: 1;
 		position: relative;
-		padding-left: 10%;
+
 	}
 
 }
