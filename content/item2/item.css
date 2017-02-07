@@ -34,10 +34,8 @@ h1{
 }
 .iframe{
 	width: 100%;
-	height: auto;
-	min-height: 2700px;
+	height: 2700px;
 	margin: 60px;
-	max-height: 1000px;
 }
 .item-bottom{
 	font-size: 20px;
@@ -49,10 +47,8 @@ h1{
 @media screen and (max-device-width: 800px){
 	.iframe{
 		width: 100%;
-		height: auto;
+		height: 2700px;
 		margin: 30px;
-		min-height: 500px;
-		max-height: 700px;
 	}
 	.item-content{
 		margin: auto;
