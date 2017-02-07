@@ -1595,9 +1595,8 @@ div.wrap{
 
 .table-item{
 	width: 60%;
-	height: 100%;
-	min-height: 300px;
-	margin-top: 20px;
+	height: 300px;
+	margin-top: 50px;
 }
 .item-top{
 	width: 100%;
