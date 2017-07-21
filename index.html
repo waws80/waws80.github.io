@@ -58,10 +58,22 @@
             cursor: pointer;
             text-decoration: underline;
         }
-        .item{
-            width: 80%;
-            margin-left: 10%;
-            margin-top: 20px;
+        @media screen  and (min-device-width: 320px) and (max-device-width: 480px){
+
+            .item{
+                width: 90%;
+                margin-left: 5%;
+                margin-top: 10px;
+            }
+
+        }
+
+        @media screen and (min-device-width: 480px){
+            .item{
+                width: 80%;
+                margin-left: 10%;
+                margin-top: 20px;
+            }
         }
         .layout-copy{
             background: #5b6270;
