@@ -65,6 +65,15 @@
                 margin-left: 3%;
                 margin-top: 10px;
             }
+            .top{
+            padding: 10px;
+            background: rgba(91, 98, 112, .7);
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            bottom: 150px;
+            right: 20px;
+        }
 
         }
 
@@ -74,6 +83,14 @@
                 margin-left: 10%;
                 margin-top: 20px;
             }
+            .top{
+            padding: 10px;
+            background: rgba(91, 98, 112, .7);
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            bottom: 200px;
+        }
         }
         .layout-copy{
             background: #5b6270;
@@ -82,13 +99,7 @@
             padding: 20px;
             color: #9ea7b4;
         }
-        .top{
-            padding: 10px;
-            background: rgba(91, 98, 112, .7);
-            color: #fff;
-            text-align: center;
-            border-radius: 2px;
-        }
+        
     </style>
 </head>
 <body>
@@ -124,7 +135,7 @@
                 <!--全局初始化加载动画-->
                 <Spin size="large" fix v-if="spinShow"></Spin>
                 <!--返回顶部-->
-                <Back-top :height="100" :bottom="100">
+                <Back-top :height="100">
                     <div class="top">返回顶端</div>
                 </Back-top>
             </div>
