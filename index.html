@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="img/g.jpeg">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">
+    <script type="text/javascript" src="http://vuejs.org/js/vue.min.js"></script>
+    <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .layout{
+            border: 1px solid #d7dde4;
+            background: #f5f7f9;
+        }
+        .layout-head{
+            position: relative;
+            width: 100%;
+            height: 180px;
+            text-align: center;
+            color: white;
+            line-height: 180px;
+            background: #5b6270;
+        }
+        .layout-head-img{
+            text-align: center;
+            line-height: 90px;
+            margin: auto;
+            display: inline-block;
+        }
+        .layout-head-img img{
+            width: 90px;
+            vertical-align: middle;
+            height: 90px;
+            border-radius: 45px;
+        }
+        .layout-head-img span{
+            margin-left: 20px;
+            font-family: Consolas,serif;
+            font-weight: 600;
+            font-size: 30px;
+        }
+        .head-menu{
+            position: absolute;
+            left: 20px;
+            top: 150px;
+            height: 60px;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        .head-menu span{
+            margin-left: 20px;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .item{
+            width: 80%;
+            margin-left: 10%;
+            margin-top: 20px;
+        }
+        .layout-copy{
+            background: #5b6270;
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            color: #9ea7b4;
+        }
+        .top{
+            padding: 10px;
+            background: rgba(91, 98, 112, .7);
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <div class="layout">
+        <!--头部-->
+        <div class="layout-head">
+            <div class="layout-head-img">
+                <img src="img/g.jpeg">
+                <span>{{name}}</span>
+            </div>
+
+        </div>
+        <!--头部菜单-->
+        <div class="head-menu">
+            <span @click="resume">{{menu[0]}}</span>
+            <span @click="csdn">{{menu[1]}}</span>
+        </div>
+
+            <div  style="margin: 20px">
+                <li v-for="item in content_data" style="list-style: none">
+                    <!--循环遍历json-->
+                    <div class="item" style="background:#eee;padding: 20px">
+                        <Card :bordered="false">
+                            <p slot="title" style="font-size: 20px">{{item.title}}</p>
+                            <a slot="extra" @click="show">{{item.labels[0] == undefined ? "个人" : item.labels[0].name}}</a>
+                            <p><a :href="item.html_url" style="word-wrap:break-word;">{{item.body.length >120 ? item.body.substr(0,120)+"..." : item.body}}</a></p>
+                        </Card>
+                    </div>
+
+                </li>
+                <!--全局初始化加载动画-->
+                <Spin size="large" fix v-if="spinShow"></Spin>
+                <!--返回顶部-->
+                <Back-top :height="100" :bottom="100">
+                    <div class="top">返回顶端</div>
+                </Back-top>
+            </div>
+
+
+        <div class="layout-copy">
+            Copyright &copy; 2017-2018 &nbsp; &nbsp; 陕ICP备17003857号
+        </div>
+    </div>
+
+</div>
+<script>
+
+    //配置网络请求
+    var http = axios.create({
+        baseURL:"https://api.github.com/search/"
+    });
+    //网络请求api
+    var path = 'issues?q=user:waws80+state:open&sort=created&order=asc';
+    //初始化vue
+    var vue =  new Vue({
+        el: '#app',
+        data: {
+            name: "Thanatos的博客",
+            menu: ['个人介绍' , 'CSDN'],
+            content_data:"",
+            spinShow: true
+        },
+        created: {
+
+        },
+        methods: {
+            show: function () {
+                this.$Message.info('我是标签');
+            },
+            showNotice: function () {
+                //初始化侧边弹窗
+                this.$Notice.open({
+                    title: '朋友你好！',
+                    desc: "欢迎您的到来，阅读后有什么建议请联系我。我的邮箱是523928638@qq.com",
+                    duration: 0
+                });
+            },
+            csdn: function () {
+                location.href = "http://blog.csdn.net/qq_16070781"
+            },
+            resume: function () {
+                this.$Message.info('开发中...');
+            }
+        }
+    });
+
+    //网络获取数据
+    http.get(path).then(function (response) {
+        vue.$Message.info('加载完成！');
+
+        //将获取的数据传递给vue
+        vue.content_data = response.data.items;
+        //隐藏家在动画
+        vue.spinShow = false;
+        //显示全局通知消息
+        vue.showNotice();
+    }).error(function () {
+        vue.$Message.info('网络罢工了！');
+    });
+</script>
+</body>
