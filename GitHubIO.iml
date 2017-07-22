@@ -7,5 +7,7 @@
     <orderEntry type="library" name="vue" level="application" />
     <orderEntry type="library" name="iview" level="application" />
     <orderEntry type="library" name="axios" level="application" />
+    <orderEntry type="library" name="Markdown.Converter" level="application" />
+    <orderEntry type="library" name="highlight" level="application" />
   </component>
 </module>

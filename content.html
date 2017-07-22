@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>内容</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">
+    <script type="text/javascript" src="http://vuejs.org/js/vue.min.js"></script>
+    <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="jquery/jquery-3.1.1.min.js"></script>
+    <!--markdown转html-->
+    <script src="js/marked.js"></script>
+    <!--代码高亮-->
+    <!--<link href="http://cdn.bootcss.com/highlight.js/8.5/styles/default.min.css" rel="stylesheet">-->
+    <!--<script src="http://cdn.bootcss.com/highlight.js/8.5/highlight.min.js"></script>-->
+    <link rel="stylesheet" href="src/styles/xcode.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .layout{
+            border: 1px solid #d7dde4;
+            background: #f5f7f9;
+        }
+        .layout-head{
+            position: relative;
+            width: 100%;
+            height: 180px;
+            text-align: center;
+            color: white;
+            line-height: 180px;
+            background: #5b6270;
+        }
+        .layout-head-img{
+            text-align: center;
+            line-height: 90px;
+            margin: auto;
+            display: inline-block;
+        }
+        .layout-head-img img{
+            width: 90px;
+            vertical-align: middle;
+            height: 90px;
+            border-radius: 45px;
+        }
+        .layout-head-img span{
+            margin-left: 20px;
+            font-family: Consolas,serif;
+            font-weight: 600;
+            font-size: 30px;
+        }
+        .head-menu{
+            position: absolute;
+            left: 20px;
+            top: 150px;
+            height: 60px;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        .head-menu span{
+            margin-left: 20px;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .content{
+            width: 100%;
+            min-height: 500px;
+        }
+        .layout-copy{
+            background: #5b6270;
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            color: #9ea7b4;
+        }
+        .top{
+            padding: 10px;
+            background: rgba(91, 98, 112, .7);
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+        }
+        .content-title{
+            width: 100%;
+            height: 50px;
+            margin-top: 20px;
+            font-size: 26px;
+            text-align: center;
+        }
+        .content-info{
+            width: 100%;
+            text-align: center;
+        }
+
+        @media screen and (min-device-width: 320px) and (max-device-width: 480px){
+            .text{
+                width: 86%;
+                line-height: 30px;
+                margin-top: 20px;
+                margin-left: 7%;
+            }
+        }
+        @media screen and (min-device-width: 480px){
+            .text{
+                width: 80%;
+                line-height: 30px;
+                margin-top: 40px;
+                margin-left: 10%;
+                font-size: 18px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <div class="layout">
+
+        <!--头部-->
+        <div class="layout-head">
+            <div class="layout-head-img">
+                <img src="img/g.jpeg">
+                <span>{{name}}</span>
+            </div>
+
+        </div>
+        <!--头部菜单-->
+        <div class="head-menu">
+            <span @click="index">{{menu[0]}}</span>
+            <span @click="resume">{{menu[1]}}</span>
+        </div>
+
+        <div class="content" ref="content-ref">
+            <div class="content-title">{{title}}</div>
+            <div class="content-info">{{time}} &nbsp; &nbsp; &nbsp;{{content.labels[0] == undefined ? "个人" : content.labels[0].name}}</div>
+            <!--使用自定义指令-->
+            <div class="text" v-html="marked(vue.content.body)" v-highlight></div>
+        </div>
+        <!--全局初始化加载动画-->
+        <Spin size="large" fix v-if="spinShow"></Spin>
+        <!--返回顶部-->
+        <Back-top :height="100" :bottom="100">
+            <div class="top">返回顶端</div>
+        </Back-top>
+
+        <div class="layout-copy">
+            Copyright &copy; 2017-2018 &nbsp; &nbsp; 陕ICP备17003857号
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+    /* 当前设备浏览器版本信息 */
+    const browser = {
+        versions: function() {
+            var u = navigator.userAgent, app = navigator.appVersion;
+            return {//移动终端浏览器版本信息
+                trident: u.indexOf('Trident') > -1, //IE内核
+                presto: u.indexOf('Presto') > -1, //Opera内核
+                webKit: u.indexOf('AppleWebKit') > -1, //苹果/谷歌内核
+                gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), //是否为移动终端
+                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //iOS终端
+                android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //Android终端或者UC浏览器
+                iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+                iPad: u.indexOf('iPad') > -1, //是否iPad
+                webApp: u.indexOf('Safari') == -1 //是否Web应该程序，没有头部与底部
+            };
+        }(),
+        language: (navigator.browserLanguage || navigator.language).toLowerCase()
+    };
+
+    const phone = (navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i));
+
+
+    const url = document.URL;
+    //博客地址id
+    var id = "";
+    if(url.indexOf("?")){
+        var  path = url.split("?")[1];
+        if (path.indexOf("&")){
+            path = path.split("&")[0]
+        }
+        if (path.indexOf("=")){
+            id = path.split("=")[1]
+        }
+    }
+
+    marked.setOptions({
+        renderer: new marked.Renderer(),
+        gfm: true,
+        tables: true,
+        breaks: false,
+        pedantic: false,
+        sanitize: false,
+        smartLists: true,
+        smartypants: false
+    });
+
+    //配置网络请求
+    const http = axios.create({
+        baseURL:"https://api.github.com/repos/"
+    });
+    //网络请求api
+    var api = 'waws80/myblog/issues/'+id;
+    //初始化vue
+    var vue =  new Vue({
+        el: '#app',
+        data: {
+            name: "Thanatos的博客",
+            menu: ['首页' , '个人介绍'],
+            title:"",
+            time: "",
+            lable: "",
+            content: "",
+            spinShow: true
+        },
+        created: function (){
+            const that = this;
+
+            if (id.length > 0){
+                //网络获取数据
+                http.get(api).then(function (response) {
+
+                    //隐藏加载动画
+                    that.spinShow = false;
+                    that.$Message.info('加载完成！');
+                    //将获取的数据传递给vue
+                    that.content = response.data;
+                    that.title = response.data.title;
+                    that.time = response.data.updated_at.substr(0,10);
+                    //显示全局通知消息
+                    if(!phone){
+                        that.showNotice();
+                    }
+                }).catch(function () {
+                    that.$Message.info('网络罢工了！');
+                    //隐藏加载动画
+                    that.spinShow = false;
+                    location.href = 'error.html'
+                });
+            }else{
+                that.$Message.info('出错了！');
+                //隐藏加载动画
+                that.spinShow = false;
+                location.href = 'error.html'
+            }
+
+        },
+        methods: {
+            show: function () {
+                this.$Message.info('我是标签');
+            },
+            showNotice: function () {
+                //初始化侧边弹窗
+                setTimeout(function () {
+                    vue.$Notice.open({
+                        title: '朋友你好！',
+                        desc: "欢迎您的到来，阅读后有什么建议请联系我。我的邮箱是523928638@qq.com",
+                        duration: 0
+                    });
+
+                },1000);
+
+            },
+            resume: function () {
+                this.$Message.info('开发中...');
+
+            },
+            index: function () {
+                location.href = "index.html"
+            }
+        }
+    });
+
+
+    //添加自定义指令
+    Vue.directive('highlight',function (el) {
+        var blocks = el.querySelectorAll('pre code');
+        blocks.forEach(function(block){
+            hljs.highlightBlock(block)
+        });
+
+    });
+
+</script>
+
+</body>
+</html>

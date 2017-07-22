@@ -3,11 +3,12 @@
     <meta charset="UTF-8">
     <link rel="icon" href="img/g.jpeg">
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
-    <title>Title</title>
+    <title>thanatos的博客</title>
     <link rel="stylesheet" type="text/css" href="http://unpkg.com/iview/dist/styles/iview.css">
     <script type="text/javascript" src="http://vuejs.org/js/vue.min.js"></script>
     <script type="text/javascript" src="http://unpkg.com/iview/dist/iview.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="http://cdn.bootcss.com/pagedown/1.0/Markdown.Converter.js"></script>
     <style>
         *{
             margin: 0;
@@ -61,19 +62,10 @@
         @media screen  and (min-device-width: 320px) and (max-device-width: 480px){
 
             .item{
-                width: 94%;
-                margin-left: 3%;
+                width: 90%;
+                margin-left: 5%;
                 margin-top: 10px;
             }
-            .top{
-            padding: 10px;
-            background: rgba(91, 98, 112, .7);
-            color: #fff;
-            text-align: center;
-            border-radius: 2px;
-            bottom: 150px;
-            right: 20px;
-        }
 
         }
 
@@ -83,15 +75,8 @@
                 margin-left: 10%;
                 margin-top: 20px;
             }
-            .top{
-            padding: 10px;
-            background: rgba(91, 98, 112, .7);
-            color: #fff;
-            text-align: center;
-            border-radius: 2px;
-            bottom: 200px;
         }
-        }
+
         .layout-copy{
             background: #5b6270;
             width: 100%;
@@ -99,7 +84,13 @@
             padding: 20px;
             color: #9ea7b4;
         }
-        
+        .top{
+            padding: 10px;
+            background: rgba(91, 98, 112, .7);
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+        }
     </style>
 </head>
 <body>
@@ -120,14 +111,15 @@
             <span @click="csdn">{{menu[1]}}</span>
         </div>
 
-            <div>
+            <div  style="margin: 20px">
                 <li v-for="item in content_data" style="list-style: none">
                     <!--循环遍历json-->
                     <div class="item" style="background:#eee;padding: 20px">
                         <Card :bordered="false">
                             <p slot="title" style="font-size: 20px">{{item.title}}</p>
                             <a slot="extra" @click="show">{{item.labels[0] == undefined ? "个人" : item.labels[0].name}}</a>
-                            <p><a :href="item.html_url" style="word-wrap:break-word;">{{item.body.length >120 ? item.body.substr(0,120)+"..." : item.body}}</a></p>
+                            <p><a v-bind="{href: baseurl+item.number }" style="word-wrap:break-word;">
+                                {{item.body.length >120 ? item.body.substr(0,120)+"..." : item.body}}</a></p>
                         </Card>
                     </div>
 
@@ -135,7 +127,7 @@
                 <!--全局初始化加载动画-->
                 <Spin size="large" fix v-if="spinShow"></Spin>
                 <!--返回顶部-->
-                <Back-top :height="100">
+                <Back-top :height="100" :bottom="100">
                     <div class="top">返回顶端</div>
                 </Back-top>
             </div>
@@ -148,6 +140,8 @@
 
 </div>
 <script>
+
+    const phone = (navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i));
 
     //配置网络请求
     var http = axios.create({
@@ -162,10 +156,8 @@
             name: "Thanatos的博客",
             menu: ['个人介绍' , 'CSDN'],
             content_data:"",
+            baseurl: "content.html?id=",
             spinShow: true
-        },
-        created: {
-
         },
         methods: {
             show: function () {
@@ -173,11 +165,14 @@
             },
             showNotice: function () {
                 //初始化侧边弹窗
-                this.$Notice.open({
-                    title: '朋友你好！',
-                    desc: "欢迎您的到来，阅读后有什么建议请联系我。我的邮箱是523928638@qq.com",
-                    duration: 0
-                });
+                if (!phone){
+                    this.$Notice.open({
+                        title: '朋友你好！',
+                        desc: "欢迎您的到来，阅读后有什么建议请联系我。我的邮箱是523928638@qq.com",
+                        duration: 0
+                    });
+                }
+
             },
             csdn: function () {
                 location.href = "http://blog.csdn.net/qq_16070781"
@@ -187,7 +182,6 @@
             }
         }
     });
-
     //网络获取数据
     http.get(path).then(function (response) {
         vue.$Message.info('加载完成！');
@@ -198,8 +192,9 @@
         vue.spinShow = false;
         //显示全局通知消息
         vue.showNotice();
-    }).error(function () {
+    }).catch(function () {
         vue.$Message.info('网络罢工了！');
+        location.href = 'error.html'
     });
 </script>
 </body>
